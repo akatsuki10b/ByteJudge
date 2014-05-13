@@ -9,5 +9,6 @@ Students can submit the solution code for the problems. Solutions will be evalua
 
 
 
-Run the file setupqueries as admin in mysql to set up the grader
+Run the file setupqueries as admin in mysql to set up the grader.
+
 initial admin userid: admin password: password
