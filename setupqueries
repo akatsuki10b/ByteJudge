@@ -1,5 +1,4 @@
 
-
 create database autograder;
 use autograder;
 
