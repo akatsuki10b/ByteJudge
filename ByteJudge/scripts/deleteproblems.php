@@ -29,7 +29,7 @@ else
 		
 		$problem_code=strip_tags(mysqli_real_escape_string($db,$problem_code));
 		$res=mysqli_query($db,$query."'$problem_code'");
-		echo $query."'$problem_code'";
+		//echo $query."'$problem_code'";
 	//	echo $query.$problem_code;
 		if(!($res))
 		{

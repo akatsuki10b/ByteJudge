@@ -95,7 +95,7 @@ else
 		}
 
 		$query="insert into groups_students(groupid,groupname,groupdetails) values('$groupid','$groupname','$groupdetails')";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{
@@ -111,7 +111,7 @@ else
 	{
 		$rollno=strip_tags(mysqli_real_escape_string($db,$rollno));
 		$query="insert into students_belongtogroups (rollno,groupid) values ('$rollno','$groupid')";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{

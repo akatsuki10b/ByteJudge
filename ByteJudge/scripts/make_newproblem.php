@@ -163,7 +163,7 @@ else
 	}
 
 	$query="insert into problems(problem_code,addedon,addedby,number_testfiles,timelimit,memorylimit,type,showmistakes,problem_title,visiblesolutions) values('$problem_code',CURRENT_TIMESTAMP(),'$currentuser',$numbertestfiles,$time_limit,$memory_limit,'$problem_type','$problem_showmistakes','$problem_title','$problem_visiblesolutions')";
-	echo $query;
+	// echo $query;
 	$res=mysqli_query($db,$query);
 	if(!($res))
 	{

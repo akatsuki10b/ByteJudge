@@ -26,7 +26,7 @@ else
 	{
 		$facultyid=strip_tags(mysqli_real_escape_string($db,$facultyid));
 		$res=mysqli_query($db,$query."'$facultyid'");
-		echo $query.$facultyid;
+		//echo $query.$facultyid;
 		if(!($res))
 		{
 			$status=false;

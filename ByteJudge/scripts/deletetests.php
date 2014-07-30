@@ -26,7 +26,7 @@ else
 	{
 		$testid=strip_tags(mysqli_real_escape_string($db,$testid));
 		$res=mysqli_query($db,$query."'$testid'");
-		echo $query.$testid;
+		//echo $query.$testid;
 		if(!($res))
 		{
 			$status=false;

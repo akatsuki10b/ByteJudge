@@ -13,6 +13,8 @@ if(isset($_SESSION['type']))
 					<li><a href='./faculty_registration.php'>Faculty</a></li>
 					<li><a href='./new_student_group.php'>Student Group</a></li>
 					<li><a href='./new_faculty_group.php'>Faculty Group</a></li>
+					<li><a href='./upload_studentlist.php'>Upload Student List</a></li>
+					<li><a href='./upload_facultylist.php'>Upload Faculty List</a></li>
 				";
 				
 			}

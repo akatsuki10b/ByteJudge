@@ -73,7 +73,7 @@ else
 		{
 			mysqli_commit($db);
 			mysqli_close($db);
-			echo $query;
+			//echo $query;
 			//echo $password;
 //			echo $username;
 			header("Location: ./../change_password.php?user=$username&prev=done");

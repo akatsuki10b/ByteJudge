@@ -127,7 +127,7 @@ else
 			goto end;
 		}
 		$query="insert into faculty_main(facultyid,fullname,dob,emailid,college,branch,designation,count_problemsadded) values('$facultyid','$fullname','$dob','$emailid','$college','$branch','$designation',0)";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{

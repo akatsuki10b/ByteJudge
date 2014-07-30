@@ -115,7 +115,7 @@ else
 		//convert dob to correct format
 		
 		$query="insert into users(userid,type) values('$rollno','student')";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{
@@ -124,7 +124,7 @@ else
 			goto end;
 		}
 		$query="insert into students_main(rollno,fullname,dob,emailid,college,branch,count_submissions,count_AC,count_WA,count_TLE,count_RTE) values('$rollno','$fullname','$dob','$emailid','$college','$branch',0,0,0,0,0)";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{

@@ -95,7 +95,7 @@ else
 		}
 
 		$query="insert into groups_faculty(groupid,groupname,groupdetails) values('$groupid','$groupname','$groupdetails')";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{
@@ -110,7 +110,7 @@ else
 	{
 		$facultyid=strip_tags(mysqli_real_escape_string($db,$facultyid));
 		$query="insert into faculty_belongtogroups (facultyid,groupid) values ('$facultyid','$groupid')";
-		echo $query;
+		//echo $query;
 		$res=mysqli_query($db,$query);
 		if(!($res))
 		{
