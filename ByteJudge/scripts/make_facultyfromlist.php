@@ -130,7 +130,7 @@ else
 		}
 		//convert dob to correct format
 	
-		$query="insert into users(userid,type) values('$facultyid','student')";
+		$query="insert into users(userid,type) values('$facultyid','faculty')";
 		
 		$res=mysqli_query($db,$query);
 		if(!($res))
@@ -163,7 +163,7 @@ else
 		end:
 		if($status)
 		{	
-			$finalstatus.="<br><br>FACULTY ID : $facultyid : Inserted successfully";
+			$finalstatus.="<br><br>FACULTY ID : $facultyid : Inserted successfully<br>";
 			
 			mysqli_commit($db);
 			
@@ -171,7 +171,7 @@ else
 		}
 		else
 		{
-			$finalstatus.="<br><br>FACULTY ID : $facultyid : NOT INSERTED : $errorstr";
+			$finalstatus.="<br><br>FACULTY ID : $facultyid : NOT INSERTED : $errorstr<br>";
 			mysqli_rollback($db);		
 			
 		//	echo "$errorstr";
@@ -202,11 +202,19 @@ else
 					{
 					
 				
-						$finalstatus.="<br>[$facultyid - $groupid] not inserted: $groupid doesn't exist";
+						$finalstatus.="[$facultyid - $groupid] NOT inserted --";
 			
+					}
+					else
+					{
+						$finalstatus.="[$facultyid - $groupid] already there --";
 					}
 				
 					
+				}
+				else
+				{
+					$finalstatus.="[$facultyid - $groupid] inserted --";
 				}
 			}
 			mysqli_commit($db);

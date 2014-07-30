@@ -162,7 +162,7 @@ else
 		end:
 		if($status)
 		{	
-			$finalstatus.="<br><br>ROLL NO : $rollno : Inserted successfully";
+			$finalstatus.="<br><br>ROLL NO : $rollno : Inserted successfully<br>";
 			
 			mysqli_commit($db);
 			
@@ -170,7 +170,7 @@ else
 		}
 		else
 		{
-			$finalstatus.="<br><br>ROLL NO : $rollno : NOT INSERTED : $errorstr";
+			$finalstatus.="<br><br>ROLL NO : $rollno : NOT INSERTED : $errorstr <br>";
 			mysqli_rollback($db);		
 			
 		//	echo "$errorstr";
@@ -201,9 +201,17 @@ else
 					{
 					
 				
-						$finalstatus.="<br>[$rollno - $groupid] not inserted";
+						$finalstatus.="[$rollno - $groupid] NOT inserted --";
+					}
+					else
+					{
+						$finalstatus.="[$rollno - $groupid] already there --";
 					}
 			
+				}
+				else
+				{
+					$finalstatus.="[$rollno - $groupid] inserted --";
 				}
 			}
 			mysqli_commit($db);
