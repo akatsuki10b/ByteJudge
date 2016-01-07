@@ -35,22 +35,22 @@ create table faculty_main
 	primary key(facultyid)
 );
 
-create table students_main 
-( 
-	rollno varchar(20), 
-	fullname varchar(50) NOT NULL, 
-	dob date, 
-	emailid varchar(50), 
-	college varchar(50), 
-	branch varchar(50), 
-	count_submissions int DEFAULT 0, 
-	count_AC int DEFAULT 0, 
-	count_WA int DEFAULT 0, 
-	count_TLE int DEFAULT 0, 
-	count_RTE int DEFAULT 0, 
+create table students_main
+(
+	rollno varchar(20),
+	fullname varchar(50) NOT NULL,
+	dob date,
+	emailid varchar(50),
+	college varchar(50),
+	branch varchar(50),
+	count_submissions int DEFAULT 0,
+	count_AC int DEFAULT 0,
+	count_WA int DEFAULT 0,
+	count_TLE int DEFAULT 0,
+	count_RTE int DEFAULT 0,
 	count_CTE int DEFAULT 0,
 	constraint fkey_rollno_uid foreign key(rollno) references users(userid) on delete cascade,
-	primary key(rollno) 
+	primary key(rollno)
 );
 
 create table admin_main
@@ -69,7 +69,7 @@ create table problems
 	timelimit int,
 	memorylimit int,
 	type varchar(20),
-	
+
 	showmistakes varchar(20),
 	problem_title varchar(50),
 	visiblesolutions varchar(10),
@@ -124,7 +124,7 @@ create table groups_faculty
 	groupname varchar(20) NOT NULL,
 	groupdetails varchar(200),
 	primary key(groupid)
-	
+
 );
 create table groups_students
 (
@@ -206,12 +206,12 @@ create trigger incrementverdictstats after update on submissions
 for each row
 begin
 	declare v_count int;
-	if new.username in (select rollno from students_main) 
+	if new.username in (select rollno from students_main)
 	then
 		update problems set totalsubmissions=totalsubmissions+1 where problem_code=new.problem_code;
 		update students_main set count_submissions=count_submissions+1 where rollno=new.username;
-		if new.verdict="AC" 
-		then	
+		if new.verdict="AC"
+		then
 			update problems set acceptedsubmissions=acceptedsubmissions+1 where problem_code=new.problem_code;
 			update students_main set count_AC=count_AC + 1 where rollno=new.username;
 			select count(*) into v_count from submissions where submissionid!=new.submissionid and verdict="AC" and problem_code=new.problem_code and username=new.username;
@@ -220,16 +220,16 @@ begin
 				update problems set solvedby=solvedby+1 where problem_code=new.problem_code;
 			end if;
 		elseif new.verdict="WA"
-		then 
+		then
 			update students_main set count_WA=count_WA + 1 where rollno=new.username;
 		elseif new.verdict="CTE"
-		then 
+		then
 			update students_main set count_CTE=count_CTE + 1 where rollno=new.username;
 		elseif new.verdict="RTE"
-		then 
+		then
 			update students_main set count_RTE=count_RTE + 1 where rollno=new.username;
-		elseif new.verdict="TLE" 
-		then 
+		elseif new.verdict="TLE"
+		then
 			update students_main set count_TLE=count_TLE + 1 where rollno=new.username;
 		end if;
 	end if;
@@ -243,24 +243,24 @@ begin
 	declare v_count int;
 	declare v_problem_code varchar(20);
 	declare v_username varchar(20);
-	
+
 	select problem_code,username into v_problem_code,v_username from submissions where submissionid=new.submissionid;
 	if v_username IN (select rollno from students_main)
 	then
-		
+
 		update test_problems set totalsubmissions=totalsubmissions+1 where testid=new.testid and problem_code=v_problem_code;
 		select verdict into v_verdict from submissions where submissionid=new.submissionid;
 		if v_verdict="AC"
 		then
 			update test_problems set acceptedsubmissions=acceptedsubmissions+1 where testid=new.testid and problem_code=v_problem_code;
-		
+
 			select count(*) into v_count from (select * from test_submissions where testid=new.testid) as A natural join (select * from submissions where problem_code=v_problem_code and username=v_username) as B where submissionid!=new.submissionid and verdict="AC";
 			if v_count=0
 			then
 				update test_problems set solvedby=solvedby+1 where testid=new.testid and problem_code=v_problem_code;
 			end if;
 		end if;
-		
+
 	end if;
 end
 |
@@ -361,4 +361,3 @@ flush privileges;
 insert into users values('admin','admin');
 insert into admin_main values('admin','Admin');
 insert into logininfo values('admin',SHA1('password'),NULL,NULL);
-

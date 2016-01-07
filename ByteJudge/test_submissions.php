@@ -12,7 +12,7 @@
 
 <meta name="author" content="" />
 
-<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
 
 <title>ByteJudge</title>
 
