@@ -1,3 +1,3 @@
-<div id="footer">
-<p> © Copyright 2014 akatsuki10</a></p>
+<div class="footer">
+© Copyright 2014 <a href="./about.php"> akatsuki10</a></p>
 </div> <!-- end #footer -->
