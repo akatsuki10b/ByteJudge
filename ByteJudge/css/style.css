@@ -5,7 +5,7 @@ src: url(./../../assets/Roboto.ttf);
 }
 body
 {
-	/*background-color:#f1f1f1;*/
+	width: 100%;
 	height:100%;
 	font-family: 'Roboto', sans-serif;
 	font-size:14px;
@@ -18,42 +18,50 @@ a:link {color:#2a4956; text-decoration:none;}    /* unvisited link */
 a:visited {color:#2a4956; text-decoration:none;} /* visited link */
 a:hover {color:#396070;text-decoration:underline;}   /* mouse over link */
 a:active {color:#396070; text-decoration:none;}  /* selected link */
-#wrapper
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.wrapper
 {
 	width:100%;
-	min-height:100%;
+	height:100%;
 }
 
-#header
-{
-	min-width:980px;
-	background-color:#2a4956;
-	border-top:#396070 solid 9px;
-	height:60px;
-	padding-left:10%;
-	color:#ffffff;
+.header {
+    width: 100%;
+    margin: auto;
+    background-color: #2a4956;
+    border-top: #396070 solid 10px;
+    height: 60px;
+    padding: 0% 10%;
+    box-sizing: border-box;
 }
 
-#nav
-{
-	min-width:980px;
-	padding-top:30px;
-	margin-left:10%;
-	width:80%;
+.logo {
+	color: #ffffff !important;
+	text-decoration: none !important;
+	line-height: 50px;
+	font-size: 22px;
 }
 
-#nav a
-{
-	/*display:inline;*/
-	padding:10px;
-	text-decoration:none;
-	border-top:#fafafa solid 4px;
+.nav-bar {
+	line-height: 50px;
 }
 
-#nav a:hover
-{
-	border-top:#396070 solid 4px;
-	background-color:#fafafa;
+.nav-bar a {
+	padding: 15px 10px 16px 10px;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.nav-bar a:hover {
+	background-color:#396070;
 }
 
 #content
@@ -164,27 +172,7 @@ a:active {color:#396070; text-decoration:none;}  /* selected link */
 	overflow:scroll;
 }
 
-#topcorner
-{
-	position:absolute;
-	top:17px;
-	margin-left:75%;
 
-}
-
-#topcorner a
-{
-	/*display:inline;*/
-	padding:8px;
-	color:#ffffff;
-	text-decoration:none;
-	/*background-color:#e1e1e1;*/
-}
-
-#topcorner a:hover
-{
-	background-color:#396070;
-}
 
 /*Login Form Begin*/
 #login_form

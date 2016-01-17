@@ -19,9 +19,9 @@
 </head>
 
 <body>
-<div id='wrapper'>
+<div class="wrapper" id='wrapper'>
 
-<?php 
+<?php
 include('./scripts/determineidentityfunc.php');
 if(isloggedin("any")==true)
 {
@@ -30,7 +30,7 @@ if(isloggedin("any")==true)
 else
 {
 	include('./includes/header.php');
-	include("includes/nav.php");
+
 
 	include('./includes/login_form.php');
 
