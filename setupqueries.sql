@@ -1,16 +1,15 @@
-
-
+mysql_script="
 create database autograder;
 use autograder;
-create user grader_admin@localhost identified by 'password';
-create user grader_user@localhost identified by 'password';
+create user grader_admin@localhost identified by '$password';
+create user grader_user@localhost identified by '$password';
 
-create user grader_faculty@localhost identified by 'password';
-create user grader_evaluate@localhost identified by 'password';
-create user grader_view@localhost identified by 'password';
-create user grader_login@localhost identified by 'password';
-create user grader_password@localhost identified by 'password';
-create user grader_test@localhost identified by 'password';
+create user grader_faculty@localhost identified by '$password';
+create user grader_evaluate@localhost identified by '$password';
+create user grader_view@localhost identified by '$password';
+create user grader_login@localhost identified by '$password';
+create user grader_password@localhost identified by '$password';
+create user grader_test@localhost identified by '$password';
 
 
 
@@ -77,7 +76,7 @@ create table problems
 	acceptedsubmissions int DEFAULT 0,
 	solvedby int DEFAULT 0,
 	constraint fkey_probadd_fid foreign key(addedby) references faculty_main(facultyid) on delete set NULL,
-	constraint check_type CHECK (type IN ("practice","test")),
+	constraint check_type CHECK (type IN ('practice','test')),
 	primary key(problem_code)
 );
 create table problems_languagesallowed
@@ -103,7 +102,7 @@ create table submissions
 	count_tle integer,
 	constraint fkey_submit_pid foreign key(problem_code) references problems(problem_code) on delete cascade,
 	constraint fkey_submit_uid foreign key(username) references users(userid) on delete cascade,
-	check (verdict in ("TLE","RTE","AC","WA","CTE","PENDING"))
+	check (verdict in ('TLE','RTE','AC','WA','CTE','PENDING'))
 );
 
 create table logininfo
@@ -210,25 +209,25 @@ begin
 	then
 		update problems set totalsubmissions=totalsubmissions+1 where problem_code=new.problem_code;
 		update students_main set count_submissions=count_submissions+1 where rollno=new.username;
-		if new.verdict="AC"
+		if new.verdict='AC'
 		then
 			update problems set acceptedsubmissions=acceptedsubmissions+1 where problem_code=new.problem_code;
 			update students_main set count_AC=count_AC + 1 where rollno=new.username;
-			select count(*) into v_count from submissions where submissionid!=new.submissionid and verdict="AC" and problem_code=new.problem_code and username=new.username;
+			select count(*) into v_count from submissions where submissionid!=new.submissionid and verdict='AC' and problem_code=new.problem_code and username=new.username;
 			if v_count=0
 			then
 				update problems set solvedby=solvedby+1 where problem_code=new.problem_code;
 			end if;
-		elseif new.verdict="WA"
+		elseif new.verdict='WA'
 		then
 			update students_main set count_WA=count_WA + 1 where rollno=new.username;
-		elseif new.verdict="CTE"
+		elseif new.verdict='CTE'
 		then
 			update students_main set count_CTE=count_CTE + 1 where rollno=new.username;
-		elseif new.verdict="RTE"
+		elseif new.verdict='RTE'
 		then
 			update students_main set count_RTE=count_RTE + 1 where rollno=new.username;
-		elseif new.verdict="TLE"
+		elseif new.verdict='TLE'
 		then
 			update students_main set count_TLE=count_TLE + 1 where rollno=new.username;
 		end if;
@@ -250,11 +249,11 @@ begin
 
 		update test_problems set totalsubmissions=totalsubmissions+1 where testid=new.testid and problem_code=v_problem_code;
 		select verdict into v_verdict from submissions where submissionid=new.submissionid;
-		if v_verdict="AC"
+		if v_verdict='AC'
 		then
 			update test_problems set acceptedsubmissions=acceptedsubmissions+1 where testid=new.testid and problem_code=v_problem_code;
 
-			select count(*) into v_count from (select * from test_submissions where testid=new.testid) as A natural join (select * from submissions where problem_code=v_problem_code and username=v_username) as B where submissionid!=new.submissionid and verdict="AC";
+			select count(*) into v_count from (select * from test_submissions where testid=new.testid) as A natural join (select * from submissions where problem_code=v_problem_code and username=v_username) as B where submissionid!=new.submissionid and verdict='AC';
 			if v_count=0
 			then
 				update test_problems set solvedby=solvedby+1 where testid=new.testid and problem_code=v_problem_code;
@@ -360,4 +359,5 @@ flush privileges;
 
 insert into users values('admin','admin');
 insert into admin_main values('admin','Admin');
-insert into logininfo values('admin',SHA1('password'),NULL,NULL);
+insert into logininfo values('admin',SHA1('$password'),NULL,NULL);
+	";
